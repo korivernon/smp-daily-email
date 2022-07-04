@@ -81,21 +81,22 @@ def prev_day_and_week_stats(name, dataframe):
     direction = None
     for index, row in last.iterrows():
         if row['Percent_Change'] > 0:
+            direction = True
             ret_str += f"{name} increased by {'%.3f'%(row['Percent_Change'])}% on {index} with {'%.3f'%(row['Volume_Change'])}%.\n"
             if row['Percent_Change'] > 0.5:
                 if row['Volume_Change'] > 0:
                     ret_str += f"Volume is positive, expect {name} to trade well.\n"
-                    direction = True
+                    # direction = True
                 else:
                     ret_str += f"Volume is negative, expect small movements in daily spot.\n"
-                    direction = True
+                    # direction = True
             else:
                 if row['Volume_Change'] > 0:
                     ret_str += f"Volume is positive, however percent change is less than 50 bps. Be cautious of trading and daily moves of {name}. Stagnant or declining growth.\n"
-                    direction = False
+                    # direction = False
                 else:
                     ret_str += f"Volume is negative, expect small movements in daily spot. Stagnant or slightly declining growth.\n"
-                    direction = False
+                    # direction = False
         else:
             ret_str += f"{name} decreased by {'%.3f'%(row['Percent_Change'])}% on {index} with {'%.3f'%(row['Volume_Change'])}%.\n"
             if row['Percent_Change'] < -0.5:
