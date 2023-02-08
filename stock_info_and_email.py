@@ -20,7 +20,7 @@ def send_email_with_data(contents, subject = "DAILY EMAIL FUTURES", sender_email
     message["Subject"] = subject
     message["Bcc"] = receiver_email  # Recommended for mass emails
 
-    body = "This is an email with a Tesla Fleet Information\n"
+    body = "This is an email with Daily Futures Outlook\n"
 
     body += str(contents)
 
@@ -43,7 +43,7 @@ def get_ticker_info(name="SPY", tail=5):
     You can tailor it to whatever you want, but just because we're trying to figure out what the sentiment for the
     next day of trading is, I don't think it's entirely necessary. 
     '''
-    df = yf.download(name)  
+    df = yf.download(name)
     ret = df.tail(tail)
     average = [] # compiling a list of the percent change during the day
     vol_list = [] #compiling a list of all of the volume differences to compare row by row
@@ -125,7 +125,8 @@ def main():
     prediction_bool_ls = [] # what do we think the general direction is going to be for given indictators
     
     for name in def_list:
-        html += f"{str(yf.Ticker(name).info['shortName'])} Daily Information\n"
+        # html += f"{str(yf.Ticker(name).info['shortName'])} Daily Information\n"
+        html += f"{name} Daily Information\n"
         df = get_ticker_info(name)
         pred_str, dir = prev_day_and_week_stats(name, df)
         html += pred_str + '\n'
